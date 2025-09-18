@@ -6,6 +6,10 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private GameObject _tilePrefab;
     [Range(0, 10)]
     [SerializeField] private int _gridLength, _gridWidth;
+    [Range(0, 10)]
+    [SerializeField] private int _amountOfHouses;
+    [Range(0, 5)]
+    [SerializeField] private int _housesLength;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
