@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GridGenerator : MonoBehaviour
@@ -18,13 +19,16 @@ public class GridGenerator : MonoBehaviour
 
     void GenerateGrid()
     {
+        Bounds bounds = new();
         for (int i = 0; i < _gridLength; i++)
         {
             for (int j = 0; j < _gridWidth; j++)
             {
-                var worldSpace = _grid.GetCellCenterWorld(new Vector3Int(i, 0, j));
+                var worldSpace = _grid.GetCellCenterWorld(new Vector3Int(i, j, 0));
                 GridSpace newSpace = _pool.GetGridSpace(i,j,worldSpace,false); //False is hardcoded, should change based on amount of Houses
+                bounds.Encapsulate(worldSpace);
             }
         }
+        EventsChannel.Generation.OnBoundsComplete?.Invoke(bounds);
     }
 }
